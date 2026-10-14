@@ -1,0 +1,5 @@
+# Datenbank-Diagramm
+
+```mermaid
+erDiagram
+```
