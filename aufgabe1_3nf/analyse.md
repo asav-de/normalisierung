@@ -18,8 +18,7 @@
 ## Funktionale Abhängigkeiten
 - Bestellnummer → Bestelldatum, Kundennummer, Versandkosten
 - Kundennummer → Kundenname, Kundenadresse
-- Produktnummer → Produktbezeichnung, Hersteller
-- Hersteller → Hersteller-Land
+- Hersteller → Land
   (transitiv: Produktnummer → Hersteller → Hersteller-Land)
 - {Bestellnummer, Produktnummer} → Menge, Einzelpreis
 
@@ -41,6 +40,6 @@ Beispiel 1007: berechnet 303.99, gespeichert 293.99 → Inkonsistenz.
 ## Tabellen in 3NF
 - **Bestellungen** (Bestellnummer PK, Bestelldatum, Kundennummer FK, Versandkosten)
 - **Kunden** (Kundennummer PK, Kundenname, Kundenadresse)
-- **Produkte** (Produktnummer PK, Produktbezeichnung, HerstellerID FK)
-- **Hersteller** (HerstellerID PK, Hersteller, Land)
+- **Produkte** (Produktnummer PK, Produktbezeichnung, Hersteller FK)
+- **Hersteller** (Hersteller PK, Land)
 - **Bestellpositionen** (Bestellnummer PK/FK, Produktnummer PK/FK, Menge, Einzelpreis)
