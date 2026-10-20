@@ -6,7 +6,7 @@ erDiagram
         int Bestellnummer PK
         date Bestelldatum
         string Kundennummer FK
-        int Versandkosten
+        decimal Versandkosten
     }
     KUNDEN {
         string Kundennummer PK
@@ -26,12 +26,12 @@ erDiagram
         int Bestellnummer PK, FK
         string Produktnummer PK, FK
         int Menge
-        int Einzelpreis
+        decimal Einzelpreis
     }
 
-    KUNDEN ||--|{ BESTELLUNGEN : "gibt auf"
+    KUNDEN ||--o{ BESTELLUNGEN : "gibt auf"
     PRODUKTE }|--|| HERSTELLER : "wird hergestellt von"
-    BESTELLPOSITIONEN }|--|| PRODUKTE : "enthält" 
+    BESTELLPOSITIONEN }o--|| PRODUKTE : "enthält" 
     BESTELLPOSITIONEN }|--|| BESTELLUNGEN : "gehört zu"
     
 ```
