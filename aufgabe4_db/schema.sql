@@ -3,37 +3,38 @@ CREATE DATABASE IF NOT EXISTS online_shop
 USE online_shop;
 
 CREATE TABLE kunden (
-  kundennummer VARCHAR(100),
-  kundenname VARCHAR(100),
-  kundenadresse VARCHAR(255),
+  kundennummer VARCHAR(100) NOT NULL,
+  kundenname VARCHAR(100) NOT NULL,
+  kundenadresse VARCHAR(255) NOT NULL,
   PRIMARY KEY (kundennummer)
 );
 CREATE TABLE bestellungen (
-  bestellnummer INT,
-  bestelldatum DATE,
-  kundennummer VARCHAR(100),
-  versandkosten DECIMAL(10,2),
+  bestellnummer INT NOT NULL,
+  bestelldatum DATE NOT NULL,
+  kundennummer VARCHAR(100) NOT NULL,
+  versandkosten DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (bestellnummer),
-  FOREIGN KEY (kundennummer) REFERENCES kunden(kundennummer)
+  CONSTRAINT FK_Bestellungen_Kunden FOREIGN KEY (kundennummer) REFERENCES kunden(kundennummer)
 );
 CREATE TABLE hersteller (
-  hersteller VARCHAR(100),
-  land VARCHAR(100),
-  PRIMARY KEY (hersteller)
+  herstellerId INT NOT NULL,
+  herstellerName VARCHAR(255) NOT NULL,
+  herstellerLand VARCHAR(255) NOT NULL,
+  PRIMARY KEY (herstellerId)
 );
 CREATE TABLE produkte (
-  produktnummer VARCHAR(100),
-  produktbezeichnung VARCHAR(100),
-  hersteller VARCHAR(100),
+  produktnummer VARCHAR(100) NOT NULL,
+  produktbezeichnung VARCHAR(100) NOT NULL,
+  herstellerId INT NOT NULL,
   PRIMARY KEY(produktnummer),
-  FOREIGN KEY(hersteller) REFERENCES hersteller(hersteller)
+  CONSTRAINT FK_Produkte_Hersteller FOREIGN KEY(herstellerId) REFERENCES hersteller(herstellerId)
 );
 CREATE TABLE bestellpositionen (
-  bestellnummer INT,
-  produktnummer VARCHAR(100),
-  menge INT,
-  einzelpreis DECIMAL(10,2),
+  bestellnummer INT NOT NULL,
+  produktnummer VARCHAR(100) NOT NULL,
+  menge INT NOT NULL,
+  einzelpreis DECIMAL(10,2) NOT NULL,
   PRIMARY KEY(bestellnummer, produktnummer),
-  FOREIGN KEY(bestellnummer) REFERENCES bestellungen(bestellnummer),
-  FOREIGN KEY(produktnummer) REFERENCES produkte(produktnummer)
+  CONSTRAINT FK_Bestellpositionen_Bestellungen FOREIGN KEY(bestellnummer) REFERENCES bestellungen(bestellnummer),
+  CONSTRAINT FK_Bestellpositionen_Produkte FOREIGN KEY(produktnummer) REFERENCES produkte(produktnummer)
 );
